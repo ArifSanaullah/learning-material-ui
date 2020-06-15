@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { Grid } from "@material-ui/core";
-import Header from "./Header";
-import Content from "./Content";
+import { Switch, Grid, Typography, Button, Paper } from "@material-ui/core";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? "dark" : "light",
+    },
+  });
+
   return (
-    <Grid container direction="column">
-      <Grid item>
-        <Header />
-      </Grid>
-      <Grid item container>
-        <Grid xs={12} container>
-          <Grid xs={0} sm={2} item />
-          <Grid xs={12} sm={8} item>
-            <Content />
-          </Grid>
-          <Grid sm={2} xs={0} item />
+    <ThemeProvider theme={theme}>
+      <Paper style={{ height: "100vh" }}>
+        <Grid container direction="column">
+          <Typography variant="h1">Hello World</Typography>
+          <Button variant="contained" color="primary">
+            This is button
+          </Button>
+          <Button variant="contained" color="secondary">
+            This is another button
+          </Button>
+          <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
         </Grid>
-      </Grid>
-    </Grid>
+      </Paper>
+    </ThemeProvider>
   );
 }
 
