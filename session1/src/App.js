@@ -1,25 +1,38 @@
 import React from "react";
 import "./App.css";
-import { Grid } from "@material-ui/core";
-import Header from "./Header";
-import Content from "./Content";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Typography } from "@material-ui/core";
+import CoolButton from "./CoolButton";
+import classNames from "classnames";
+
+const useStyles = makeStyles((theme) => ({
+  buttonStyles: {
+    color: "green",
+    border: "1",
+  },
+  textStyles: {
+    color: "red",
+    [theme.breakpoints.up("sm")]: {
+      color: "blue",
+    },
+  },
+  textBackground: {
+    backgroundColor: "gray",
+  },
+}));
 
 function App() {
+  const classes = useStyles();
   return (
-    <Grid container direction="column">
-      <Grid item>
-        <Header />
-      </Grid>
-      <Grid item container>
-        <Grid xs={12} container>
-          <Grid xs={0} sm={2} item />
-          <Grid xs={12} sm={8} item>
-            <Content />
-          </Grid>
-          <Grid sm={2} xs={0} item />
-        </Grid>
-      </Grid>
-    </Grid>
+    <div>
+      <CoolButton cool={true} />
+      <Button className={classes.buttonStyles}>Hello world</Button>
+      <Typography
+        className={classNames(classes.textStyles, classes.textBackground)}
+      >
+        Hello world text
+      </Typography>
+    </div>
   );
 }
 
